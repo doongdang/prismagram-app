@@ -23,7 +23,7 @@ export default function App() {
   }, []);
 
   return loaded ? (
-    <View>
+    <View style={{ justifyContent: "center", flex: 1, alignItems: "center" }}>
       <Text>Open up App.js to start working on your app!</Text>
     </View> // 로딩되면 화면에 보여짐
   ) : (
