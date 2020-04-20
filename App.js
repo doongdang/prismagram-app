@@ -5,15 +5,19 @@ import { Asset } from "expo-asset";
 import * as Font from "expo-font";
 import { Text, View, AsyncStorage } from "react-native";
 import { ApolloProvider } from "@apollo/react-hooks";
+import { ThemeProvider } from "styled-components";
 
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { persistCache } from "apollo-cache-persist";
 import ApolloClient from "apollo-boost";
 import apolloClientOptions from "./apollo";
+import style from "./style";
 
 export default function App() {
   const [loaded, setLoaded] = useState(false); // loaded 상태 변환
   const [client, setClient] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(null); // loggedIn 여부에 따라 다른 Navigation을 리턴해주기 위함이다.
+  //isLoggedIn이 null인 것이 포인트. why? !isLoggedIn 로 처리할시 false, null, undefind전부 반응하게 된다.
 
   const preLoad = async () => {
     try {
@@ -29,7 +33,15 @@ export default function App() {
       const client = new ApolloClient({
         cache,
         ...apolloClientOptions,
-      });
+      }); // client 초기화 작업
+
+      const isLoggedIn = await AsyncStorage.getItem("isLoggedIn");
+      if (isLoggedIn === null || isLoggedIn === false) {
+        setIsLoggedIn(false);
+      } else {
+        setIsLoggedIn(true);
+      }
+
       setLoaded(true);
       setClient(client);
     } catch (e) {
@@ -41,15 +53,19 @@ export default function App() {
     preLoad();
   }, []);
 
-  return loaded && client ? (
+  return loaded && client && isLoggedIn !== null ? (
     <ApolloProvider client={client}>
-      <View style={{ justifyContent: "center", flex: 1, alignItems: "center" }}>
-        <Text>Open up App.js to start working on your app!</Text>
-      </View>
+      <ThemeProvider theme={style}>
+        <View
+          style={{ justifyContent: "center", flex: 1, alignItems: "center" }}
+        >
+          {isLoggedIn === true ? <Text>I`m In</Text> : <Text>I`m Out</Text>}
+        </View>
+      </ThemeProvider>
     </ApolloProvider>
   ) : (
     <AppLoading /> // 로딩중인 동안 보여지는 Splash Screens
   );
 }
 // 처음에 Component Monut 되면 loading = false / client  =null 상태
-//
+// cache란???
