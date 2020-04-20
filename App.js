@@ -3,7 +3,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { AppLoading } from "expo";
 import { Asset } from "expo-asset";
 import * as Font from "expo-font";
-import { Text, View, AsyncStorage, TouchableOpacity } from "react-native";
+import { AsyncStorage } from "react-native";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { ThemeProvider } from "styled-components";
 
@@ -12,6 +12,8 @@ import { persistCache } from "apollo-cache-persist";
 import ApolloClient from "apollo-boost";
 import apolloClientOptions from "./apollo";
 import style from "./style";
+import NavController from "./components/NavController";
+import { AuthProvider } from "./AuthContext";
 
 export default function App() {
   const [loaded, setLoaded] = useState(false); // loaded 상태 변환
@@ -36,7 +38,7 @@ export default function App() {
       }); // client 초기화 작업
 
       const isLoggedIn = await AsyncStorage.getItem("isLoggedIn");
-      if (isLoggedIn === null || isLoggedIn === "false") {
+      if (!isLoggedIn || isLoggedIn === "false") {
         setIsLoggedIn(false);
       } else {
         setIsLoggedIn(true);
@@ -53,39 +55,12 @@ export default function App() {
     preLoad();
   }, []);
 
-  const logUserIn = async () => {
-    try {
-      await AsyncStorage.setItem("isLoggedIn", "true");
-      setIsLoggedIn(true);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  const logUserOut = async () => {
-    try {
-      await AsyncStorage.setItem("isLoggedIn", "false");
-      setIsLoggedIn(false);
-    } catch (e) {
-      console.log(e);
-    }
-  };
   return loaded && client && isLoggedIn !== null ? (
     <ApolloProvider client={client}>
       <ThemeProvider theme={style}>
-        <View
-          style={{ justifyContent: "center", flex: 1, alignItems: "center" }}
-        >
-          {isLoggedIn === true ? (
-            <TouchableOpacity onPress={logUserOut}>
-              <Text>Log Out</Text>
-            </TouchableOpacity>
-          ) : (
-            <TouchableOpacity onPress={logUserIn}>
-              <Text>Log In</Text>
-            </TouchableOpacity>
-          )}
-        </View>
+        <AuthProvider isLoggedIn={isLoggedIn}>
+          <NavController />
+        </AuthProvider>
       </ThemeProvider>
     </ApolloProvider>
   ) : (
@@ -93,4 +68,3 @@ export default function App() {
   );
 }
 // 처음에 Component Monut 되면 loading = false / client  =null 상태
-// cache란???
