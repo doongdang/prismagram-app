@@ -6,6 +6,7 @@ import SignUp from "../screens/Auth/SignUp";
 import Confirm from "../screens/Auth/Confirm";
 import AuthHome from "../screens/Auth/AuthHome";
 import LogIn from "../screens/Auth/LogIn";
+import { CardStyleInterpolators } from "@react-navigation/stack";
 
 const AuthNavigation = createStackNavigator();
 
@@ -20,6 +21,9 @@ export default () => {
         <AuthNavigation.Screen
           name="SignUp"
           component={SignUp}
+          options={{
+            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+          }}
         ></AuthNavigation.Screen>
         <AuthNavigation.Screen
           name="Confirm"
@@ -28,6 +32,9 @@ export default () => {
         <AuthNavigation.Screen
           name="LogIn"
           component={LogIn}
+          options={{
+            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+          }}
         ></AuthNavigation.Screen>
       </AuthNavigation.Navigator>
     </NavigationContainer>
