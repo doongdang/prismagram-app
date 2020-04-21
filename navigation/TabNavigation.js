@@ -12,20 +12,13 @@ import { createStackNavigator } from "@react-navigation/stack";
 const TabNavigation = createBottomTabNavigator();
 const stackFactory = createStackNavigator();
 const stackInsert = ({ route }) => {
-  const { initialRoute } = route.params;
+  const { initialRoute, customConfig } = route.params;
   return (
     <stackFactory.Navigator>
       <stackFactory.Screen
         name={route.name}
         component={initialRoute}
-        options={{
-          headerTitleAlign: "center",
-          headerRight: () => (
-            <TouchableOpacity>
-              <Text>Hello</Text>
-            </TouchableOpacity>
-          ),
-        }}
+        options={customConfig}
       />
     </stackFactory.Navigator>
   );
@@ -37,7 +30,17 @@ export default () => {
       <TabNavigation.Screen
         name="Home"
         component={stackInsert}
-        initialParams={{ initialRoute: Home }}
+        initialParams={{
+          initialRoute: Home,
+          customConfig: {
+            headerTitleAlign: "center",
+            headerRight: () => (
+              <TouchableOpacity>
+                <Text>Hello</Text>
+              </TouchableOpacity>
+            ),
+          },
+        }}
       />
       <TabNavigation.Screen
         name="Search"
