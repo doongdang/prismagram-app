@@ -12,11 +12,8 @@ const PhotoTab = createMaterialTopTabNavigator();
 const PhotoTabs = () => {
   return (
     <PhotoTab.Navigator tabBarPosition="bottom">
-      <PhotoTab.Screen
-        name="SelectPhoto"
-        component={SelectPhoto}
-      ></PhotoTab.Screen>
-      <PhotoTab.Screen name="TakePhoto" component={TakePhoto}></PhotoTab.Screen>
+      <PhotoTab.Screen name="SelectPhoto" component={SelectPhoto} />
+      <PhotoTab.Screen name="TakePhoto" component={TakePhoto} />
     </PhotoTab.Navigator>
   );
 };
@@ -29,14 +26,16 @@ export default () => {
       <PhotoStack.Screen
         name="PhotoTabs"
         component={PhotoTabs}
-      ></PhotoStack.Screen>
+        options={{ title: "" }}
+      />
       <PhotoStack.Screen
         name="UploadPhoto"
         component={UploadPhoto}
         options={{
+          title: "",
           cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
         }}
-      ></PhotoStack.Screen>
+      />
     </PhotoStack.Navigator>
   );
 };

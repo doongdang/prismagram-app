@@ -17,28 +17,22 @@ export default () => {
         initialRouteName="AuthHome"
         headerMode="none" //최초 라우팅 연결을 이름이 "AuthHome" 인곳으로 연결
       >
-        <AuthNavigation.Screen
-          name="AuthHome"
-          component={AuthHome}
-        ></AuthNavigation.Screen>
+        <AuthNavigation.Screen name="AuthHome" component={AuthHome} />
         <AuthNavigation.Screen
           name="SignUp"
           component={SignUp}
           options={{
             cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
           }} // IOS Style로 좌우 제스쳐로 변경
-        ></AuthNavigation.Screen>
-        <AuthNavigation.Screen
-          name="Confirm"
-          component={Confirm}
-        ></AuthNavigation.Screen>
+        />
+        <AuthNavigation.Screen name="Confirm" component={Confirm} />
         <AuthNavigation.Screen
           name="LogIn"
           component={LogIn}
           options={{
             cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
           }}
-        ></AuthNavigation.Screen>
+        />
       </AuthNavigation.Navigator>
     </NavigationContainer>
   );

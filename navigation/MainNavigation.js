@@ -11,14 +11,11 @@ export default () => {
   return (
     <NavigationContainer>
       <MainNavigation.Navigator headerMode="none">
-        <MainNavigation.Screen
-          name="TabNavigation"
-          component={TabNavigation}
-        ></MainNavigation.Screen>
+        <MainNavigation.Screen name="TabNavigation" component={TabNavigation} />
         <MainNavigation.Screen
           name="PhotoNavigation"
           component={PhotoNavigation}
-        ></MainNavigation.Screen>
+        />
       </MainNavigation.Navigator>
     </NavigationContainer>
   );
