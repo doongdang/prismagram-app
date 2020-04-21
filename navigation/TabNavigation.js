@@ -30,7 +30,7 @@ export default () => {
             tabPress: (e) => {
               e.preventDefault(), console.log("Add");
             },
-          }}
+          }} //아마도 screen 내부에서 Event Handle 하려면 prop으로 Listener 줘야하는듯
         ></TabNavigation.Screen>
         <TabNavigation.Screen
           name="Notification"
