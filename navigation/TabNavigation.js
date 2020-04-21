@@ -1,21 +1,49 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import * as React from "react";
 import "react-native-gesture-handler";
-import { View } from "react-native";
-import {
-  StackHome,
-  StackNotification,
-  StackProfile,
-  StackSearch,
-} from "./StackFactory";
+import { View, Text, TouchableOpacity } from "react-native";
+
+import Home from "../screens/Tab/Home";
+import Search from "../screens/Tab/Search";
+import Notification from "../screens/Tab/Notification";
+import Profile from "../screens/Tab/Profile";
+import { createStackNavigator } from "@react-navigation/stack";
 
 const TabNavigation = createBottomTabNavigator();
+const stackFactory = createStackNavigator();
+const stackInsert = ({ route }) => {
+  const { initialRoute } = route.params;
+  return (
+    <stackFactory.Navigator>
+      <stackFactory.Screen
+        name={route.name}
+        component={initialRoute}
+        options={{
+          headerTitleAlign: "center",
+          headerRight: () => (
+            <TouchableOpacity>
+              <Text>Hello</Text>
+            </TouchableOpacity>
+          ),
+        }}
+      />
+    </stackFactory.Navigator>
+  );
+};
 
 export default () => {
   return (
     <TabNavigation.Navigator>
-      <TabNavigation.Screen name="Home" component={StackHome} />
-      <TabNavigation.Screen name="Search" component={StackSearch} />
+      <TabNavigation.Screen
+        name="Home"
+        component={stackInsert}
+        initialParams={{ initialRoute: Home }}
+      />
+      <TabNavigation.Screen
+        name="Search"
+        component={stackInsert}
+        initialParams={{ initialRoute: Search }}
+      />
       <TabNavigation.Screen
         name="Add"
         component={View}
@@ -26,8 +54,16 @@ export default () => {
           },
         })} //아마도 screen 내부에서 Event Handle 하려면 prop으로 Listener 줘야하는듯
       />
-      <TabNavigation.Screen name="Notification" component={StackNotification} />
-      <TabNavigation.Screen name="Profile" component={StackProfile} />
+      <TabNavigation.Screen
+        name="Notification"
+        component={stackInsert}
+        initialParams={{ initialRoute: Notification }}
+      />
+      <TabNavigation.Screen
+        name="Profile"
+        component={stackInsert}
+        initialParams={{ initialRoute: Profile }}
+      />
     </TabNavigation.Navigator>
   );
 };

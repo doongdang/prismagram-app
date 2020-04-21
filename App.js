@@ -14,7 +14,11 @@ import apolloClientOptions from "./apollo";
 import style from "./style";
 import NavController from "./components/NavController";
 import { AuthProvider } from "./AuthContext";
+import { YellowBox } from "react-native";
 
+YellowBox.ignoreWarnings([
+  "Non-serializable values were found in the navigation state",
+]);
 export default function App() {
   const [loaded, setLoaded] = useState(false); // loaded 상태 변환
   const [client, setClient] = useState(null);
