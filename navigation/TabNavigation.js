@@ -45,7 +45,12 @@ export default () => {
       <TabNavigation.Screen
         name="Search"
         component={stackInsert}
-        initialParams={{ initialRoute: Search }}
+        initialParams={{
+          initialRoute: Search,
+          customConfig: {
+            headerTitleAlign: "center",
+          },
+        }}
       />
       <TabNavigation.Screen
         name="Add"
@@ -60,12 +65,22 @@ export default () => {
       <TabNavigation.Screen
         name="Notification"
         component={stackInsert}
-        initialParams={{ initialRoute: Notification }}
+        initialParams={{
+          initialRoute: Notification,
+          customConfig: {
+            headerTitleAlign: "center",
+          },
+        }}
       />
       <TabNavigation.Screen
         name="Profile"
         component={stackInsert}
-        initialParams={{ initialRoute: Profile }}
+        initialParams={{
+          initialRoute: Profile,
+          customConfig: {
+            headerTitleAlign: "center",
+          },
+        }}
       />
     </TabNavigation.Navigator>
   );
