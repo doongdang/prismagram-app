@@ -13,7 +13,10 @@ const AuthNavigation = createStackNavigator();
 export default () => {
   return (
     <NavigationContainer>
-      <AuthNavigation.Navigator initialRouteName="AuthHome" headerMode="none">
+      <AuthNavigation.Navigator
+        initialRouteName="AuthHome"
+        headerMode="none" //최초 라우팅 연결을 이름이 "AuthHome" 인곳으로 연결
+      >
         <AuthNavigation.Screen
           name="AuthHome"
           component={AuthHome}
@@ -23,7 +26,7 @@ export default () => {
           component={SignUp}
           options={{
             cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-          }}
+          }} // IOS Style로 좌우 제스쳐로 변경
         ></AuthNavigation.Screen>
         <AuthNavigation.Screen
           name="Confirm"
