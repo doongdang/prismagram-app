@@ -1,13 +1,14 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import * as React from "react";
 import "react-native-gesture-handler";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View } from "react-native";
 
 import Home from "../screens/Tab/Home";
 import Search from "../screens/Tab/Search";
 import Notification from "../screens/Tab/Notification";
 import Profile from "../screens/Tab/Profile";
 import { createStackNavigator } from "@react-navigation/stack";
+import MessagesLink from "../components/MessagesLink";
 
 const TabNavigation = createBottomTabNavigator();
 const stackFactory = createStackNavigator();
@@ -34,11 +35,7 @@ export default () => {
           initialRoute: Home,
           customConfig: {
             headerTitleAlign: "center",
-            headerRight: () => (
-              <TouchableOpacity>
-                <Text>Hello</Text>
-              </TouchableOpacity>
-            ),
+            headerRight: () => <MessagesLink />,
           },
         }}
       />
