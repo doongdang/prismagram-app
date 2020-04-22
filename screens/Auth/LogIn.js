@@ -18,7 +18,7 @@ export default ({ navigation }) => {
   const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
   const [loading, setLoading] = useState(false);
-  const [requestSecret] = useMutation(LOG_IN, {
+  const [requestSecretMutation] = useMutation(LOG_IN, {
     variables: {
       email: emailInput.value,
     },
@@ -35,9 +35,17 @@ export default ({ navigation }) => {
     }
     try {
       setLoading(true);
-      await requestSecret();
-      Alert.alert("Check Your Email!");
-      navigation.navigate("Confirm");
+      const {
+        data: { requestSecret },
+      } = await requestSecretMutation(); //requestSecret의 boolean값이 들어오는지 확인
+      if (requestSecret) {
+        Alert.alert("Check Your Email!");
+        navigation.navigate("Confirm");
+        return;
+      } else {
+        Alert.alert("Account Not Found!");
+        navigation.navigate("SignUp");
+      }
     } catch (e) {
       Alert.alert("Can`t Log In Now");
     } finally {
@@ -53,7 +61,7 @@ export default ({ navigation }) => {
           placeholder={"Email"}
           keyboardType={"email-address"}
           returnKeyType={"send"} // 키보드 완료버튼 => 보내기로 변경
-          onEndEditing={handleLogin} // 보내기버튼 클릭시 handleLogin 실행
+          onSubEditing={handleLogin} // 보내기버튼 클릭시 handleLogin 실행
         />
         <AuthButton loading={loading} onPress={handleLogin} text={"Log In"} />
       </View>

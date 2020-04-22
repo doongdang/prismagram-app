@@ -21,7 +21,7 @@ const AuthInput = ({
   keyboardType = "default",
   onChange,
   returnKeyType = "done", //키보드에서 완료버튼
-  onEndEditing = () => null, //완료버튼 클릭시 함수 호출
+  onSubmitEditing = () => null, //완료버튼 클릭시 함수 호출
 }) => (
   <Container>
     <TextInput
@@ -30,7 +30,7 @@ const AuthInput = ({
       placeholder={placeholder}
       value={value}
       returnKeyType={returnKeyType}
-      onEndEditing={onEndEditing}
+      onSubmitEditing={onSubmitEditing}
     />
   </Container>
 );
@@ -48,7 +48,7 @@ AuthInput.propTypes = {
   ]),
   onChange: PropTypes.func.isRequired,
   returnKeyType: PropTypes.oneOf(["done", "go", "next", "search", "send"]),
-  onEndEditing: PropTypes.func,
+  onSubmitEditing: PropTypes.func,
 };
 
 export default AuthInput;
