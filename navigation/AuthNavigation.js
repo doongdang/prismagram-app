@@ -7,12 +7,13 @@ import Confirm from "../screens/Auth/Confirm";
 import AuthHome from "../screens/Auth/AuthHome";
 import LogIn from "../screens/Auth/LogIn";
 import { CardStyleInterpolators } from "@react-navigation/stack";
+import MyTheme from "./Theme";
 
 const AuthNavigation = createStackNavigator();
 
 export default () => {
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={MyTheme}>
       <AuthNavigation.Navigator
         initialRouteName="AuthHome"
         headerMode="none" //최초 라우팅 연결을 이름이 "AuthHome" 인곳으로 연결

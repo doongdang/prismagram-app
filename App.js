@@ -18,7 +18,9 @@ import { YellowBox } from "react-native";
 
 YellowBox.ignoreWarnings([
   "Non-serializable values were found in the navigation state",
+  "Expected style",
 ]);
+
 export default function App() {
   const [loaded, setLoaded] = useState(false); // loaded 상태 변환
   const [client, setClient] = useState(null);
