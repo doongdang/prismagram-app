@@ -13,7 +13,7 @@ const View = styled.View`
   flex: 1;
 `;
 
-export default ({ navigation, route }) => {
+export default ({ navigation }) => {
   const emailInput = useInput("");
   const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 

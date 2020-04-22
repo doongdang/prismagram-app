@@ -37,7 +37,7 @@ export default ({ navigation, route }) => {
         data: { confirmSecret },
       } = await confirmSecretMutation();
       if (confirmSecret !== "" || confirmSecret !== false) {
-        logIn(confirmSecret);
+        logIn(confirmSecret); // => logIn = useLogIn상태이므로 useLogIn(confirmSecret)을 실행
       } else {
         Alert.alert("Wrong Secret Key!");
       }
