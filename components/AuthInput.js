@@ -20,6 +20,8 @@ const AuthInput = ({
   value,
   keyboardType = "default",
   onChange,
+  returnKeyType = "done",
+  onEndEditing = () => null,
 }) => (
   <Container>
     <TextInput
@@ -27,6 +29,8 @@ const AuthInput = ({
       keyboardType={keyboardType}
       placeholder={placeholder}
       value={value}
+      returnKeyType={returnKeyType}
+      onEndEditing={onEndEditing}
     />
   </Container>
 );
@@ -43,6 +47,8 @@ AuthInput.propTypes = {
     "phone-pad",
   ]),
   onChange: PropTypes.func.isRequired,
+  returnKeyType: PropTypes.oneOf(["done", "go", "next", "search", "send"]),
+  onEndEditing: PropTypes.func,
 };
 
 export default AuthInput;
