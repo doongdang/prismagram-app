@@ -20,8 +20,8 @@ const AuthInput = ({
   value,
   keyboardType = "default",
   onChange,
-  returnKeyType = "done",
-  onEndEditing = () => null,
+  returnKeyType = "done", //키보드에서 완료버튼
+  onEndEditing = () => null, //완료버튼 클릭시 함수 호출
 }) => (
   <Container>
     <TextInput

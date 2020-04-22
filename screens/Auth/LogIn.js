@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import AuthButton from "../../components/AuthButton";
 import AuthInput from "../../components/AuthInput";
 import useInput from "../../hooks/useInput";
 import { Alert, TouchableWithoutFeedback, Keyboard } from "react-native";
+import { useMutation } from "@apollo/react-hooks";
+import { LOG_IN } from "./AuthQueries";
 
 const View = styled.View`
   justify-content: center;
@@ -11,11 +13,18 @@ const View = styled.View`
   flex: 1;
 `;
 
-export default () => {
+export default ({ navigation }) => {
   const emailInput = useInput("");
   const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-  const handleLogin = () => {
+  const [loading, setLoading] = useState(false);
+  const [requestSecret] = useMutation(LOG_IN, {
+    variables: {
+      email: emailInput.value,
+    },
+  });
+
+  const handleLogin = async () => {
     const { value } = emailInput;
     if (value === "") {
       return Alert.alert("Email Can`t Be Empty");
@@ -24,19 +33,29 @@ export default () => {
     } else if (!emailRegex.test(value)) {
       return Alert.alert("Not Invalid Email");
     }
+    try {
+      setLoading(true);
+      await requestSecret();
+      Alert.alert("Check Your Email!");
+      navigation.navigate("Confirm");
+    } catch (e) {
+      Alert.alert("Can`t Log In Now");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+    <TouchableWithoutFeedback disabled={loading} onPress={Keyboard.dismiss}>
       <View>
         <AuthInput
           {...emailInput} // value = {emailInput.value}로도 쓸 수 있음.
           placeholder={"Email"}
           keyboardType={"email-address"}
-          returnKeyType={"send"}
-          onEndEditing={handleLogin}
+          returnKeyType={"send"} // 키보드 완료버튼 => 보내기로 변경
+          onEndEditing={handleLogin} // 보내기버튼 클릭시 handleLogin 실행
         />
-        <AuthButton onPress={handleLogin} text={"Log In"} />
+        <AuthButton loading={loading} onPress={handleLogin} text={"Log In"} />
       </View>
     </TouchableWithoutFeedback>
   );
