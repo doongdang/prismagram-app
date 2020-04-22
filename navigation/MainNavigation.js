@@ -11,7 +11,7 @@ const MainNavigation = createStackNavigator();
 
 export default () => {
   return (
-    <NavigationContainer theme={MyTheme}>
+    <NavigationContainer>
       <MainNavigation.Navigator headerMode="none">
         <MainNavigation.Screen name="TabNavigation" component={TabNavigation} />
         <MainNavigation.Screen

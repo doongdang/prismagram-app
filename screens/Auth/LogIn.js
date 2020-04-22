@@ -13,7 +13,7 @@ const View = styled.View`
   flex: 1;
 `;
 
-export default ({ navigation }) => {
+export default ({ navigation, route }) => {
   const emailInput = useInput("");
   const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -40,11 +40,11 @@ export default ({ navigation }) => {
       } = await requestSecretMutation(); //requestSecret의 boolean값이 들어오는지 확인
       if (requestSecret) {
         Alert.alert("Check Your Email!");
-        navigation.navigate("Confirm");
+        navigation.navigate("Confirm", { email: value });
         return;
       } else {
         Alert.alert("Account Not Found!");
-        navigation.navigate("SignUp");
+        navigation.navigate("SignUp", { email: value });
       }
     } catch (e) {
       Alert.alert("Can`t Log In Now");
