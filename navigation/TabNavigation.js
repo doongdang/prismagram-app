@@ -10,7 +10,6 @@ import Profile from "../screens/Tab/Profile";
 import { createStackNavigator } from "@react-navigation/stack";
 import MessagesLink from "../components/MessagesLink";
 import NavIcon from "../components/NavIcon";
-import style from "../style";
 
 const TabNavigation = createBottomTabNavigator();
 const stackFactory = createStackNavigator();
