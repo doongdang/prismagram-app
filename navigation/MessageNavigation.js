@@ -9,8 +9,16 @@ const MessageNavigation = createStackNavigator();
 export default () => {
   return (
     <MessageNavigation.Navigator>
-      <MessageNavigation.Screen name="Messages" component={Messages} />
-      <MessageNavigation.Screen name="Message" component={Message} />
+      <MessageNavigation.Screen
+        name="Messages"
+        component={Messages}
+        options={{ title: "" }}
+      />
+      <MessageNavigation.Screen
+        name="Message"
+        component={Message}
+        options={{ title: "" }}
+      />
     </MessageNavigation.Navigator>
   );
 };

@@ -10,7 +10,7 @@ import Profile from "../screens/Tab/Profile";
 import { createStackNavigator } from "@react-navigation/stack";
 import MessagesLink from "../components/MessagesLink";
 import NavIcon from "../components/NavIcon";
-import { Platform } from "react-native";
+import style from "../style";
 
 const TabNavigation = createBottomTabNavigator();
 const stackFactory = createStackNavigator();
@@ -43,9 +43,9 @@ export default () => {
         }}
         options={{
           tabBarIcon: ({ focused }) => (
-            <NavIcon name={focused ? "md-home" : "ios-home"} />
+            <NavIcon name={"md-home"} size={28} focused={focused} />
           ),
-        }} // 이건 왜 이렇게 해야하는지 모르겟다. 정확히는 focused의 역할이 뭔지 모르겟음. 되긴하니까 걍 함.
+        }} // focused ==> 탭에 현재 있는지 아닌지를 판단.
       />
       <TabNavigation.Screen
         name="Search"
@@ -58,7 +58,7 @@ export default () => {
         }}
         options={{
           tabBarIcon: ({ focused }) => (
-            <NavIcon name={focused ? "md-search" : "ios-search"} />
+            <NavIcon name={"md-search"} size={28} focused={focused} />
           ),
         }}
       />
@@ -73,7 +73,11 @@ export default () => {
         })} //아마도 screen 내부에서 Event Handle 하려면 prop으로 Listener 줘야하는듯
         options={{
           tabBarIcon: ({ focused }) => (
-            <NavIcon name={focused ? "md-add" : "ios-add"} />
+            <NavIcon
+              name={"md-add-circle-outline"}
+              size={28}
+              focused={focused}
+            />
           ),
         }}
       />
@@ -88,7 +92,11 @@ export default () => {
         }}
         options={{
           tabBarIcon: ({ focused }) => (
-            <NavIcon name={focused ? "md-heart" : "ios-heart"} />
+            <NavIcon
+              name={focused ? "md-heart" : "md-heart-empty"}
+              size={28}
+              focused={focused}
+            />
           ),
         }}
       />
@@ -103,7 +111,7 @@ export default () => {
         }}
         options={{
           tabBarIcon: ({ focused }) => (
-            <NavIcon name={focused ? "md-person" : "ios-person"} />
+            <NavIcon name={"md-person"} size={28} focused={focused} />
           ),
         }}
       />
