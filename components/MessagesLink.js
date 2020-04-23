@@ -1,16 +1,22 @@
 import * as React from "react";
 import styled from "styled-components";
 import { useNavigation } from "@react-navigation/native";
+import { Ionicons } from "@expo/vector-icons";
 
-const Container = styled.TouchableOpacity``;
+import { Platform } from "react-native";
+import NavIcon from "./NavIcon";
 
-const Text = styled.Text``;
+const Container = styled.TouchableOpacity`
+  padding-right: 15px;
+`;
 
 export default () => {
   const navigation = useNavigation();
   return (
     <Container onPress={() => navigation.navigate("MessageNavigation")}>
-      <Text>Messages</Text>
+      <NavIcon
+        name={Platform.OS === "android" ? "md-paper-plane" : "ios-paper-plane"}
+      />
     </Container>
   );
 };
