@@ -6,7 +6,6 @@ import TakePhoto from "../screens/Photo/TakePhoto";
 import UploadPhoto from "../screens/Photo/UploadPhoto";
 import { createStackNavigator } from "@react-navigation/stack";
 import { CardStyleInterpolators } from "@react-navigation/stack";
-
 const PhotoTab = createMaterialTopTabNavigator();
 
 const PhotoTabs = () => {
@@ -22,7 +21,10 @@ const PhotoStack = createStackNavigator();
 
 export default () => {
   return (
-    <PhotoStack.Navigator initialRouteName="PhotoTabs">
+    <PhotoStack.Navigator
+      initialRouteName="PhotoTabs"
+      screenOptions={{ cardStyle: { backgroundColor: "white" } }}
+    >
       <PhotoStack.Screen
         name="PhotoTabs"
         component={PhotoTabs}

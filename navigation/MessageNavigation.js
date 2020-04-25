@@ -12,12 +12,12 @@ export default () => {
       <MessageNavigation.Screen
         name="Messages"
         component={Messages}
-        options={{ title: "" }}
+        options={{ title: "", cardStyle: { backgroundColor: "white" } }}
       />
       <MessageNavigation.Screen
         name="Message"
         component={Message}
-        options={{ title: "" }}
+        options={{ title: "", cardStyle: { backgroundColor: "white" } }}
       />
     </MessageNavigation.Navigator>
   );

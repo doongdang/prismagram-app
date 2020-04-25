@@ -16,7 +16,9 @@ const stackFactory = createStackNavigator();
 const stackInsert = ({ route }) => {
   const { initialRoute, customConfig } = route.params;
   return (
-    <stackFactory.Navigator>
+    <stackFactory.Navigator
+      screenOptions={{ cardStyle: { backgroundColor: "white" } }}
+    >
       <stackFactory.Screen
         name={route.name}
         component={initialRoute}
