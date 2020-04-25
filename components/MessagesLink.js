@@ -1,7 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
 import { useNavigation } from "@react-navigation/native";
-import { Ionicons } from "@expo/vector-icons";
 
 import { Platform } from "react-native";
 import NavIcon from "./NavIcon";
