@@ -2,14 +2,15 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import * as React from "react";
 import "react-native-gesture-handler";
 import { View } from "react-native";
-
 import Home from "../screens/Tab/Home";
 import Search from "../screens/Tab/Search";
 import Notification from "../screens/Tab/Notification";
 import Profile from "../screens/Tab/Profile";
+import Detail from "../screens/Detail";
 import { createStackNavigator } from "@react-navigation/stack";
 import MessagesLink from "../components/MessagesLink";
 import NavIcon from "../components/NavIcon";
+import { CardStyleInterpolators } from "@react-navigation/stack";
 
 const TabNavigation = createBottomTabNavigator();
 const stackFactory = createStackNavigator();
@@ -26,6 +27,14 @@ const stackInsert = ({ route }) => {
         name={route.name}
         component={initialRoute}
         options={customConfig}
+      />
+      <stackFactory.Screen
+        name={"Detail"}
+        component={Detail}
+        options={{
+          title: "",
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        }}
       />
     </stackFactory.Navigator>
   );
