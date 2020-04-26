@@ -17,7 +17,10 @@ const stackInsert = ({ route }) => {
   const { initialRoute, customConfig } = route.params;
   return (
     <stackFactory.Navigator
-      screenOptions={{ cardStyle: { backgroundColor: "white" } }}
+      screenOptions={{
+        cardStyle: { backgroundColor: "white" },
+        headerStyle: { backgroundColor: "#FAFAFA" },
+      }}
     >
       <stackFactory.Screen
         name={route.name}
@@ -30,7 +33,13 @@ const stackInsert = ({ route }) => {
 
 export default () => {
   return (
-    <TabNavigation.Navigator tabBarOptions={{ showLabel: false }}>
+    <TabNavigation.Navigator
+      tabBarOptions={{
+        showLabel: false,
+        style: { backgroundColor: "#FAFAFA" },
+      }}
+      initialRouteName={"Search"}
+    >
       <TabNavigation.Screen
         name="Home"
         component={stackInsert}

@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import SearchBar from "../../components/SearchBar";
+import useInput from "../../hooks/useInput";
 
 const View = styled.View`
   justify-content: center;
@@ -9,8 +11,18 @@ const View = styled.View`
 
 const Text = styled.Text``;
 
-export default () => (
-  <View>
-    <Text>Search</Text>
-  </View>
-);
+export default ({ navigation }) => {
+  const searchInput = useInput("");
+  const onSubmit = () => {
+    console.log("SS");
+  };
+  navigation.setOptions({
+    headerTitle: () => <SearchBar {...searchInput} onSubmit={onSubmit} />,
+  });
+
+  return (
+    <View>
+      <Text>Search</Text>
+    </View>
+  );
+};

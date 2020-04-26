@@ -23,7 +23,10 @@ export default () => {
   return (
     <PhotoStack.Navigator
       initialRouteName="PhotoTabs"
-      screenOptions={{ cardStyle: { backgroundColor: "white" } }}
+      screenOptions={{
+        cardStyle: { backgroundColor: "white" },
+        headerStyle: { backgroundColor: "#FAFAFA" },
+      }}
     >
       <PhotoStack.Screen
         name="PhotoTabs"

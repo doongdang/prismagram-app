@@ -8,7 +8,9 @@ const MessageNavigation = createStackNavigator();
 
 export default () => {
   return (
-    <MessageNavigation.Navigator>
+    <MessageNavigation.Navigator
+      screenOptions={{ headerStyle: { backgroundColor: "#FAFAFA" } }}
+    >
       <MessageNavigation.Screen
         name="Messages"
         component={Messages}
