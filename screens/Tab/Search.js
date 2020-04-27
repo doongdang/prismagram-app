@@ -22,9 +22,10 @@ export const SEARCH = gql`
 `;
 
 const View = styled.View`
+  margin-top: 40px;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
-  flex: 1;
 `;
 
 const Text = styled.Text``;

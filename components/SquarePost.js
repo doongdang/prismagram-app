@@ -5,25 +5,32 @@ import { Image, TouchableOpacity } from "react-native";
 import constants from "../constants";
 import { useNavigation } from "@react-navigation/native";
 
+const Display = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+`;
 const SquarePost = ({ files = [], id }) => {
   const navigation = useNavigation();
 
   return (
-    <TouchableOpacity
-      onPress={() => navigation.navigate("Detail", { id })}
-      style={{
-        width: constants.width / 3,
-        height: constants.height / 5,
-      }}
-    >
-      <Image
-        source={{ uri: files[0].url }}
+    <Display>
+      <TouchableOpacity
+        onPress={() => navigation.navigate("Detail", { id })}
         style={{
           width: constants.width / 3,
           height: constants.height / 5,
+          flexDirection: "row",
         }}
-      />
-    </TouchableOpacity>
+      >
+        <Image
+          source={{ uri: files[0].url }}
+          style={{
+            width: constants.width / 3,
+            height: constants.height / 5,
+          }}
+        />
+      </TouchableOpacity>
+    </Display>
   );
 };
 

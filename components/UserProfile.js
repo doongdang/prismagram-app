@@ -113,6 +113,7 @@ const UserProfile = ({
           </Button>
         </TouchableOpacity>
       </ButtonContainer>
+
       {posts &&
         posts.map((p) =>
           isGrid ? <SquarePost key={p.id} {...p} /> : <Post key={p.id} {...p} />
