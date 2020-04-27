@@ -48,7 +48,7 @@ export default ({ navigation }) => {
     },
     skip: !shouldFetch, // shouldFetch가 true인 경우 Query 던지고 False인 경우 스킵함
   });
-  console.log(data, loading);
+
   const onSubmit = () => {
     setShouldFetch(true); // 키보드에서 완료 버튼 누를시에 shouldFetch를 true로 돌리며 Query보내기
   };

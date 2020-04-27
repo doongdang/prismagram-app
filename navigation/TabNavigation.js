@@ -11,6 +11,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import MessagesLink from "../components/MessagesLink";
 import NavIcon from "../components/NavIcon";
 import { CardStyleInterpolators } from "@react-navigation/stack";
+import UserDetail from "../screens/UserDetail";
 
 const TabNavigation = createBottomTabNavigator();
 const stackFactory = createStackNavigator();
@@ -36,6 +37,13 @@ const stackInsert = ({ route }) => {
           cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
         }}
       />
+      <stackFactory.Screen
+        name={"UserDetail"}
+        component={UserDetail}
+        options={{
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        }}
+      />
     </stackFactory.Navigator>
   );
 };
@@ -47,7 +55,7 @@ export default () => {
         showLabel: false,
         style: { backgroundColor: "#FAFAFA" },
       }}
-      initialRouteName={"Search"}
+      initialRouteName={"Profile"}
     >
       <TabNavigation.Screen
         name="Home"
