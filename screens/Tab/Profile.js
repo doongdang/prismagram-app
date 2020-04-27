@@ -26,7 +26,7 @@ const Text = styled.Text``;
 
 export default ({ navigation }) => {
   const { loading, data } = useQuery(ME);
-  console.log(loading, data);
+
   navigation.setOptions({
     headerTitle: data.me ? data.me.username : "Loading",
   });

@@ -17,6 +17,7 @@ const TabNavigation = createBottomTabNavigator();
 const stackFactory = createStackNavigator();
 const stackInsert = ({ route }) => {
   const { initialRoute, customConfig } = route.params;
+
   return (
     <stackFactory.Navigator
       screenOptions={{
@@ -41,6 +42,7 @@ const stackInsert = ({ route }) => {
         name={"UserDetail"}
         component={UserDetail}
         options={{
+          headerTitleAlign: "center",
           cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
         }}
       />

@@ -14,11 +14,11 @@ const GET_USER = gql`
   }
   ${USER_FRAGMENT}
 `;
-export default ({ route }) => {
+export default ({ route, navigation }) => {
   const { loading, data } = useQuery(GET_USER, {
     variables: { username: route.params?.username ?? "Not Found Username" },
   });
-
+  navigation.setOptions({ headerTitle: route.params.username });
   return (
     <ScrollView>
       {loading ? (
