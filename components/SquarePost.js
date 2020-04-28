@@ -14,7 +14,6 @@ const SquarePost = ({ files = [], id }) => {
       style={{
         width: constants.width / 3,
         height: constants.height / 5,
-        flexDirection: "row",
       }}
     >
       <Image
@@ -23,6 +22,7 @@ const SquarePost = ({ files = [], id }) => {
           width: constants.width / 3,
           height: constants.height / 5,
         }}
+        resizeMode={"stretch"}
       />
     </TouchableOpacity>
   );

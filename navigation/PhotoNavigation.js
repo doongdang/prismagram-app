@@ -47,7 +47,7 @@ export default () => {
       <PhotoStack.Screen
         name="PhotoTabs"
         component={PhotoTabs}
-        options={{ title: "", headerShown: false }}
+        options={{ title: "" }}
       />
       <PhotoStack.Screen
         name="UploadPhoto"
