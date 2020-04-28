@@ -6,13 +6,29 @@ import TakePhoto from "../screens/Photo/TakePhoto";
 import UploadPhoto from "../screens/Photo/UploadPhoto";
 import { createStackNavigator } from "@react-navigation/stack";
 import { CardStyleInterpolators } from "@react-navigation/stack";
+import style from "../style";
 const PhotoTab = createMaterialTopTabNavigator();
 
 const PhotoTabs = () => {
   return (
-    <PhotoTab.Navigator tabBarPosition="bottom">
-      <PhotoTab.Screen name="SelectPhoto" component={SelectPhoto} />
-      <PhotoTab.Screen name="TakePhoto" component={TakePhoto} />
+    <PhotoTab.Navigator
+      tabBarPosition="bottom"
+      tabBarOptions={{
+        indicatorStyle: { backgroundColor: style.blueColor },
+        style: { backgroundColor: "#FAFAFA" },
+        labelStyle: { fontWeight: "700" },
+      }}
+    >
+      <PhotoTab.Screen
+        name="SelectPhoto"
+        component={SelectPhoto}
+        options={{ tabBarLabel: "Select" }}
+      />
+      <PhotoTab.Screen
+        name="TakePhoto"
+        component={TakePhoto}
+        options={{ tabBarLabel: "Take" }}
+      />
     </PhotoTab.Navigator>
   );
 };
@@ -31,7 +47,7 @@ export default () => {
       <PhotoStack.Screen
         name="PhotoTabs"
         component={PhotoTabs}
-        options={{ title: "" }}
+        options={{ title: "", headerShown: false }}
       />
       <PhotoStack.Screen
         name="UploadPhoto"
