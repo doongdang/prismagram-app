@@ -54,6 +54,9 @@ const Button = styled.View`
   align-items: center;
 `;
 
+const SquarePostSort = styled.View`
+  flex-direction: row;
+`;
 const UserProfile = ({
   avatar,
   postsCount,
@@ -113,11 +116,16 @@ const UserProfile = ({
           </Button>
         </TouchableOpacity>
       </ButtonContainer>
-
-      {posts &&
-        posts.map((p) =>
-          isGrid ? <SquarePost key={p.id} {...p} /> : <Post key={p.id} {...p} />
-        )}
+      <SquarePostSort>
+        {posts &&
+          posts.map((p) =>
+            isGrid ? (
+              <SquarePost key={p.id} {...p} />
+            ) : (
+              <Post key={p.id} {...p} />
+            )
+          )}
+      </SquarePostSort>
     </View>
   );
 };

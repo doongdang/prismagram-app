@@ -21,11 +21,8 @@ export const SEARCH = gql`
   }
 `;
 
-const View = styled.View`
-  margin-top: 40px;
+const SquarePostSort = styled.View`
   flex-direction: row;
-  justify-content: center;
-  align-items: center;
 `;
 
 const Text = styled.Text``;
@@ -76,9 +73,13 @@ export default ({ navigation }) => {
       {loading ? (
         <Loader />
       ) : (
-        data &&
-        data.searchPost &&
-        data.searchPost.map((post) => <SquarePost key={post.id} {...post} />)
+        <SquarePostSort>
+          {data &&
+            data.searchPost &&
+            data.searchPost.map((post) => (
+              <SquarePost key={post.id} {...post} />
+            ))}
+        </SquarePostSort>
       )}
     </ScrollView>
   );
