@@ -11,8 +11,6 @@ const View = styled.View`
   background-color: white;
 `;
 
-const Text = styled.Text``;
-
 export default () => {
   const [loading, setLoading] = useState(true);
   const [hasPermisson, setHasPermission] = useState(false); // permission이 되었는지의 여부를 판단하기 위해 만듬
