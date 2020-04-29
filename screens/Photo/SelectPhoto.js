@@ -5,13 +5,30 @@ import * as Permissions from "expo-permissions";
 import Loader from "../../components/Loader";
 import { Image, ScrollView, TouchableOpacity } from "react-native";
 import constants from "../../constants";
+import style from "../../style";
 
 const View = styled.View`
   flex: 1;
   background-color: white;
 `;
+const Button = styled.TouchableOpacity`
+  width: 100px;
+  height: 30px;
+  position: absolute;
+  right: 5px;
+  top: 15px;
+  background-color: ${style.blueColor};
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+`;
 
-export default () => {
+const Text = styled.Text`
+  color: ${style.whiteColor};
+  font-weight: 600;
+`;
+
+export default ({ navigation }) => {
   const [loading, setLoading] = useState(true);
   const [hasPermisson, setHasPermission] = useState(false); // permission이 되었는지의 여부를 판단하기 위해 만듬
   const [selected, setSelected] = useState();
@@ -43,7 +60,9 @@ export default () => {
       setHasPermission(false);
     }
   };
-
+  const sendSelected = () => {
+    navigation.navigate("UploadPhoto", { photo: selected });
+  };
   useEffect(() => {
     askPermission();
   }, []);
@@ -64,6 +83,9 @@ export default () => {
                 source={{ uri: selected.uri }}
                 resizeMode={"stretch"}
               />
+              <Button onPress={sendSelected}>
+                <Text>Upload</Text>
+              </Button>
               <ScrollView
                 contentContainerStyle={{
                   flexDirection: "row",
