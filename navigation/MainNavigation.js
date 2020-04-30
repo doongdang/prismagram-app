@@ -12,7 +12,6 @@ export default () => {
   return (
     <NavigationContainer>
       <MainNavigation.Navigator
-        initialRouteName={"PhotoNavigation"}
         headerMode="none"
         screenOptions={{ headerStyle: { backgroundColor: "#FAFAFA" } }}
       >

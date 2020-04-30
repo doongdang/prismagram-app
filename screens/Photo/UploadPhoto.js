@@ -6,6 +6,19 @@ import { Image, ActivityIndicator, Alert, View } from "react-native";
 import style from "../../style";
 import axios from "axios";
 import apolloClientOptions from "../../apollo";
+import { gql } from "apollo-boost";
+import { useMutation } from "@apollo/react-hooks";
+import { FEED_QUERY } from "../Tab/Home";
+
+const UPLOAD = gql`
+  mutation upload($caption: String!, $files: [String!]!, $location: String) {
+    upload(caption: $caption, files: $files, location: $location) {
+      id
+      caption
+      location
+    }
+  }
+`;
 
 const Container = styled.View`
   padding: 20px;
@@ -37,14 +50,16 @@ const Text = styled.Text`
   font-weight: 600;
 `;
 
-export default ({ route }) => {
+export default ({ route, navigation }) => {
   const [loading, setIsLoading] = useState(false);
-  const [fileUrl, setFileUrl] = useState("");
   const captionInput = useInput("");
   const locationInput = useInput("");
   const photo = route.params.photo;
   const name = photo.filename;
   const [, type] = name.split(".");
+  const [uploadMutation] = useMutation(UPLOAD, {
+    refetchQueries: () => [{ query: FEED_QUERY }],
+  });
   const handleSubmit = async () => {
     if (captionInput.value === "" || locationInput.value === "") {
       Alert.alert("All fields are required");
@@ -56,6 +71,7 @@ export default ({ route }) => {
       uri: photo.uri,
     }); // file = name 미들웨어에 주었던 이름
     try {
+      setIsLoading(true);
       const {
         data: { path },
       } = await axios.post(
@@ -67,9 +83,24 @@ export default ({ route }) => {
           },
         }
       );
-      setFileUrl(path);
+
+      const {
+        data: { upload },
+      } = await uploadMutation({
+        variables: {
+          files: [path],
+          caption: captionInput.value,
+          location: locationInput.value,
+        },
+      });
+      console.log(path);
+      if (upload.id) {
+        navigation.navigate("TabNavigation");
+      }
     } catch (e) {
       console.log(e);
+    } finally {
+      setIsLoading(false);
     }
   };
   return (
