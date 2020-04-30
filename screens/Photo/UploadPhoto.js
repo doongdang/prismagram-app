@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { Image, ActivityIndicator, Alert, View } from "react-native";
 import style from "../../style";
 import axios from "axios";
+import apolloClientOptions from "../../apollo";
 
 const Container = styled.View`
   padding: 20px;
@@ -42,18 +43,34 @@ export default ({ route }) => {
   const captionInput = useInput("");
   const locationInput = useInput("");
   const photo = route.params.photo;
+  const name = photo.filename;
+  const [, type] = name.split(".");
   const handleSubmit = async () => {
     if (captionInput.value === "" || locationInput.value === "") {
       Alert.alert("All fields are required");
     }
     const formData = new FormData(); // form 필드와 그 값을 나타내는 key,value를 쉽게 생성할수 있게 함. XMLHttpRequest.send()를 사용해 전송가능
-    formData.append("file", photo); // file = name 미들웨어에 주었던 이름, photo =value // append =>FormData 객체에 추가
-    console.log(photo);
-    axios.post("http://192.168.0.24:4000/api/upload", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
+    formData.append("file", {
+      name,
+      type: "image/jpeg",
+      uri: photo.uri,
+    }); // file = name 미들웨어에 주었던 이름
+    try {
+      const {
+        data: { path },
+      } = await axios.post(
+        apolloClientOptions.uri.toString() + "api/upload",
+        formData,
+        {
+          headers: {
+            "content-type": "multipart/form-data",
+          },
+        }
+      );
+      setFileUrl(path);
+    } catch (e) {
+      console.log(e);
+    }
   };
   return (
     <View>
